@@ -1,0 +1,41 @@
+
+package melegy.com.domeafavour;
+
+import java.util.List;
+
+import melegy.com.domeafavour.models.resources.Favor;
+import melegy.com.domeafavour.models.resources.User;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import rx.Observable;
+
+/**
+ * Created by ahmad on 5/9/17.
+ */
+
+public interface NetworkApi {
+
+    @POST("/users")
+    Observable<User> addUser(@Body User user);
+
+    @GET("/users/{id}")
+    Observable<User> getUserById(@Path("id") String userID);
+
+    @PATCH("/users/{id}")
+    Observable<User> updateUser(@Path("id") String userID);
+
+    @POST("/favors")
+    Observable<Favor> addFavor(@Body Favor favor);
+
+    @PATCH("/favors/{id}")
+    Observable<Favor> updateFavor(@Path("id") String favorID);
+
+    @GET("/favors")
+    Observable<List<Favor>> getNearbyFavors(@Query("long") long x, @Query("lat") long y);
+
+
+}

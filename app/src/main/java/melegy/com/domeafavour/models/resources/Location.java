@@ -1,8 +1,6 @@
 
 package melegy.com.domeafavour.models.resources;
 
-import android.os.Parcelable;
-
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -15,13 +13,13 @@ import java.util.List;
  */
 
 @AutoValue
-public abstract class Location implements Parcelable{
+public abstract class Location {
 
     @SerializedName("coordinates")
     abstract List<Long> coordinates();
 
     public static TypeAdapter<Location> typeAdapter(Gson gson) {
-        return new $AutoValue_Location.GsonTypeAdapter(gson);
+        return new AutoValue_Location.GsonTypeAdapter(gson);
     }
 
     public static Location create(List<Long> coordinates) {

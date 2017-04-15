@@ -1,7 +1,7 @@
 
 package melegy.com.domeafavour.models.resources;
 
-import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 @AutoValue
-public abstract class User implements Parcelable {
+public abstract class User {
 
     @SerializedName("first_name")
     abstract String firstName();
@@ -24,11 +24,12 @@ public abstract class User implements Parcelable {
     @SerializedName("email")
     abstract String email();
 
+    @Nullable
     @SerializedName("current_location")
     abstract Location currentLocation();
 
     public static TypeAdapter<User> typeAdapter(Gson gson) {
-        return new $AutoValue_User.GsonTypeAdapter(gson);
+        return new AutoValue_User.GsonTypeAdapter(gson);
     }
 
 }
