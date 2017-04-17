@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour.di.modules;
+package melegy.com.domeafavour.shared.di.modules;
 
 import android.app.Application;
 

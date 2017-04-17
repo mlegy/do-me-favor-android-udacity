@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour.models.responses;
+package melegy.com.domeafavour.shared.models.responses;
 
 import android.support.annotation.Nullable;
 
@@ -8,8 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import melegy.com.domeafavour.models.resources.Error;
-import melegy.com.domeafavour.models.resources.User;
+import melegy.com.domeafavour.shared.models.resources.Error;
+import melegy.com.domeafavour.shared.models.resources.User;
 
 /**
  * Created by ahmad on 4/11/17.

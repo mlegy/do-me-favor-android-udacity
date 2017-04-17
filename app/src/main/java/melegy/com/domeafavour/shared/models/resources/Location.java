@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour.models.resources;
+package melegy.com.domeafavour.shared.models.resources;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
