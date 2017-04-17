@@ -4,7 +4,7 @@ package melegy.com.domeafavour.features.authentication.register;
 import javax.inject.Inject;
 
 import melegy.com.domeafavour.App;
-import melegy.com.domeafavour.NetworkApi;
+import melegy.com.domeafavour.shared.NetworkApi;
 import melegy.com.domeafavour.shared.models.resources.User;
 import rx.Observable;
 

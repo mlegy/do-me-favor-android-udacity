@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import melegy.com.domeafavour.BuildConfig;
-import melegy.com.domeafavour.NetworkApi;
+import melegy.com.domeafavour.shared.NetworkApi;
 import melegy.com.domeafavour.shared.models.AutoValueGsonFactory;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
