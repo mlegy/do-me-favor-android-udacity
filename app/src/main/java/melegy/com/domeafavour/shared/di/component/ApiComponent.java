@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import melegy.com.domeafavour.features.authentication.register.RegisterVMImpl;
+import melegy.com.domeafavour.features.favors.addFavor.AddFavorVMImpl;
 import melegy.com.domeafavour.shared.di.modules.ApiModule;
 
 /**
@@ -16,4 +17,6 @@ import melegy.com.domeafavour.shared.di.modules.ApiModule;
 public interface ApiComponent {
 
     void inject(RegisterVMImpl registerVM);
+
+    void inject(AddFavorVMImpl addFavorVM);
 }

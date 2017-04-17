@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import melegy.com.domeafavour.features.authentication.register.RegisterApiService;
+import melegy.com.domeafavour.features.favors.addFavor.AddFavorApiService;
 import melegy.com.domeafavour.shared.di.modules.AppModule;
 import melegy.com.domeafavour.shared.di.modules.NetModule;
 
@@ -19,4 +20,6 @@ import melegy.com.domeafavour.shared.di.modules.NetModule;
 public interface NetComponent {
 
     void inject(RegisterApiService registerApiService);
+
+    void inject(AddFavorApiService addFavorApiService);
 }

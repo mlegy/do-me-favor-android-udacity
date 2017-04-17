@@ -5,6 +5,7 @@ import java.util.List;
 
 import melegy.com.domeafavour.shared.models.resources.Favor;
 import melegy.com.domeafavour.shared.models.resources.User;
+import melegy.com.domeafavour.shared.models.responses.AddFavorResponse;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
@@ -29,7 +30,7 @@ public interface NetworkApi {
     Observable<User> updateUser(@Path("id") String userID);
 
     @POST("/favors")
-    Observable<Favor> addFavor(@Body Favor favor);
+    Observable<AddFavorResponse> addFavor(@Body Favor favor);
 
     @PATCH("/favors/{id}")
     Observable<Favor> updateFavor(@Path("id") String favorID);
