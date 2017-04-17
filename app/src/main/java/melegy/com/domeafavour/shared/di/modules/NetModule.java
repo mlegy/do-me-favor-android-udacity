@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour.di.modules;
+package melegy.com.domeafavour.shared.di.modules;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -13,7 +13,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import melegy.com.domeafavour.BuildConfig;
-import melegy.com.domeafavour.models.AutoValueGsonFactory;
+import melegy.com.domeafavour.NetworkApi;
+import melegy.com.domeafavour.shared.models.AutoValueGsonFactory;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -27,7 +28,7 @@ import static retrofit2.Retrofit.Builder;
  */
 
 @Module
-public class ApiModule {
+public class NetModule {
 
     @Provides
     @Singleton
@@ -63,5 +64,11 @@ public class ApiModule {
                 .baseUrl(BuildConfig.API_URL)
                 .client(okHttpClient)
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    NetworkApi providesNetworkApi(Retrofit retrofit){
+        return retrofit.create(NetworkApi.class);
     }
 }

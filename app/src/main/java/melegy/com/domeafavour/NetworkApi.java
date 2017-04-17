@@ -3,8 +3,8 @@ package melegy.com.domeafavour;
 
 import java.util.List;
 
-import melegy.com.domeafavour.models.resources.Favor;
-import melegy.com.domeafavour.models.resources.User;
+import melegy.com.domeafavour.shared.models.resources.Favor;
+import melegy.com.domeafavour.shared.models.resources.User;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;

@@ -1,4 +1,4 @@
-package melegy.com.domeafavour.models.requests;
+package melegy.com.domeafavour.shared.models.requests;
 
 import com.google.auto.value.AutoValue;
 
