@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour;
+package melegy.com.domeafavour.shared;
 
 import java.util.List;
 
