@@ -32,8 +32,11 @@ public interface NetworkApi {
     @POST("/favors")
     Observable<AddFavorResponse> addFavor(@Body Favor favor);
 
-    @PATCH("/favors/{id}")
-    Observable<Favor> updateFavor(@Path("id") String favorID);
+    @PATCH("/favors/{id}/benefactor")
+    Observable<Favor> addBenefactorToFavor(@Path("id") String userId);
+
+    @PATCH("/favors/{id}/done")
+    Observable<Favor> markFavorAsDone(@Path("id") String favorID);
 
     @GET("/favors")
     Observable<List<Favor>> getNearbyFavors(@Query("long") long x, @Query("lat") long y);

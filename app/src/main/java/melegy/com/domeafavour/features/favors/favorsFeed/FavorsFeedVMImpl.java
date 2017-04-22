@@ -11,7 +11,7 @@ import rx.Observable;
  * Created by ahmad on 4/17/17.
  */
 
-public class FavorsVMImpl implements FavorsFeedVM {
+public class FavorsFeedVMImpl implements FavorsFeedVM {
 
     @Inject
     FavorsFeedApiService favorsFeedApiService;
