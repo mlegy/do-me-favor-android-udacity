@@ -1,7 +1,5 @@
 
-package melegy.com.domeafavour.models.resources;
-
-import android.os.Parcelable;
+package melegy.com.domeafavour.shared.models.resources;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -13,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 @AutoValue
-public abstract class Favor implements Parcelable {
+public abstract class Favor {
 
     @SerializedName("title")
     abstract String title();
@@ -34,7 +32,7 @@ public abstract class Favor implements Parcelable {
     abstract Boolean done();
 
     public static TypeAdapter<Favor> typeAdapter(Gson gson) {
-        return new $AutoValue_Favor.GsonTypeAdapter(gson);
+        return new AutoValue_Favor.GsonTypeAdapter(gson);
     }
 
     public static Favor create(String title, String description, User owner, User benefactor,

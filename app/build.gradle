@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "melegy.com.domeafavour"
         minSdkVersion 15
@@ -10,22 +11,27 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ['autovaluegson.defaultCollectionsToEmpty': 'true']
-            }
-        }
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        debug {
+            buildConfigField "String", "API_URL", "\"https://apricot-cobbler-23847.herokuapp.com/\""
+            buildConfigField "String", "ACCESS_TOKEN", PRODUCTION_ACCESS_TOKEN
         }
+        release {
+            buildConfigField "String", "API_URL", "\"https://apricot-cobbler-23847.herokuapp.com/\""
+            buildConfigField "String", "ACCESS_TOKEN", DEBUG_ACCESS_TOKEN
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -39,4 +45,22 @@ dependencies {
     provided 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
     annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
     annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
+    // Dagger 2
+    compile 'com.google.dagger:dagger:2.9'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
+    provided 'javax.annotation:jsr250-api:1.0'
+    // Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+    }
 }
