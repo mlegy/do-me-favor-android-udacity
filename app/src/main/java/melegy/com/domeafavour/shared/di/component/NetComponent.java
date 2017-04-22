@@ -7,6 +7,7 @@ import dagger.Component;
 import melegy.com.domeafavour.features.authentication.register.RegisterApiService;
 import melegy.com.domeafavour.features.favors.addFavor.AddFavorApiService;
 import melegy.com.domeafavour.features.favors.favorsFeed.FavorsFeedApiService;
+import melegy.com.domeafavour.features.favors.updateFavor.UpdateFavorApiService;
 import melegy.com.domeafavour.shared.di.modules.AppModule;
 import melegy.com.domeafavour.shared.di.modules.NetModule;
 
@@ -25,4 +26,6 @@ public interface NetComponent {
     void inject(AddFavorApiService addFavorApiService);
 
     void inject(FavorsFeedApiService favorsFeedApiService);
+
+    void inject(UpdateFavorApiService updateFavorApiService);
 }
