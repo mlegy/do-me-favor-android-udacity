@@ -3,9 +3,9 @@ package melegy.com.domeafavour.shared;
 
 import java.util.List;
 
-import melegy.com.domeafavour.shared.models.resources.Favor;
-import melegy.com.domeafavour.shared.models.resources.User;
-import melegy.com.domeafavour.shared.models.responses.AddFavorResponse;
+import melegy.com.domeafavour.data.models.resources.Favor;
+import melegy.com.domeafavour.data.models.resources.User;
+import melegy.com.domeafavour.data.models.responses.AddFavorResponse;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
@@ -39,7 +39,7 @@ public interface NetworkApi {
     Observable<Favor> markFavorAsDone(@Path("id") String favorID);
 
     @GET("/favors")
-    Observable<List<Favor>> getNearbyFavors(@Query("long") long x, @Query("lat") long y);
+    Observable<List<Favor>> getNearbyFavors(@Query("long") double x, @Query("lat") double y);
 
 
 }

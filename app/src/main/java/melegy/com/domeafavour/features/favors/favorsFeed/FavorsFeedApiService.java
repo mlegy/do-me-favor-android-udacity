@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import melegy.com.domeafavour.App;
 import melegy.com.domeafavour.shared.NetworkApi;
-import melegy.com.domeafavour.shared.models.resources.Favor;
+import melegy.com.domeafavour.data.models.resources.Favor;
 import rx.Observable;
 
 /**
@@ -22,7 +22,7 @@ public class FavorsFeedApiService {
         App.getApp().getNetComponent().inject(this);
     }
 
-    Observable<List<Favor>> getNearbyFavor(long x, long y){
+    public Observable<List<Favor>> getNearbyFavor(double x, double y){
         return networkApi.getNearbyFavors(x, y);
     }
 }

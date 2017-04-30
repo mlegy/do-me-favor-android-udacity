@@ -1,4 +1,4 @@
-package melegy.com.domeafavour.shared.models;
+package melegy.com.domeafavour.data.models;
 
 import com.google.gson.TypeAdapterFactory;
 import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;

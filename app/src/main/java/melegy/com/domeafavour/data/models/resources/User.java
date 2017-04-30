@@ -1,5 +1,5 @@
 
-package melegy.com.domeafavour.shared.models.resources;
+package melegy.com.domeafavour.data.models.resources;
 
 import android.support.annotation.Nullable;
 

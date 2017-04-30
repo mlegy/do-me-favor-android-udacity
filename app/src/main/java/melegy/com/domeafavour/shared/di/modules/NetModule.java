@@ -14,7 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 import melegy.com.domeafavour.BuildConfig;
 import melegy.com.domeafavour.shared.NetworkApi;
-import melegy.com.domeafavour.shared.models.AutoValueGsonFactory;
+import melegy.com.domeafavour.data.models.AutoValueGsonFactory;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
