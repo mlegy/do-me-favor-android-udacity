@@ -15,13 +15,17 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_URL", "\"https://apricot-cobbler-23847.herokuapp.com/\""
-            buildConfigField "String", "ACCESS_TOKEN", PRODUCTION_ACCESS_TOKEN
+            buildConfigField "String", "ACCESS_TOKEN", ACCESS_TOKEN
+            buildConfigField "String", "DB_NAME", DB_NAME_DEBUG
+            buildConfigField "int", "DB_VERSION", DB_VERSION_DEBUG
         }
         release {
             buildConfigField "String", "API_URL", "\"https://apricot-cobbler-23847.herokuapp.com/\""
             buildConfigField "String", "ACCESS_TOKEN", DEBUG_ACCESS_TOKEN
+            buildConfigField "String", "DB_NAME", DB_NAME
+            buildConfigField "int", "DB_VERSION", DB_VERSION
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -53,6 +57,16 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    // RxJava
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    // StorIO
+    compile "com.pushtorefresh.storio:sqlite:1.12.3"
+    compile "com.pushtorefresh.storio:content-resolver:1.12.3"
+    compile "com.pushtorefresh.storio:sqlite-annotations:1.12.3"
+    compile "com.pushtorefresh.storio:content-resolver-annotations:1.12.3"
+    annotationProcessor "com.pushtorefresh.storio:sqlite-annotations-processor:1.12.3"
+    annotationProcessor "com.pushtorefresh.storio:content-resolver-annotations-processor:1.12.3"
 }
 
 buildscript {

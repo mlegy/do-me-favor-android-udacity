@@ -1,3 +1,4 @@
+
 package melegy.com.domeafavour;
 
 /**
@@ -8,10 +9,13 @@ import android.app.Application;
 
 import melegy.com.domeafavour.shared.di.component.ApiComponent;
 import melegy.com.domeafavour.shared.di.component.DaggerApiComponent;
+import melegy.com.domeafavour.shared.di.component.DaggerDataStoreComponent;
 import melegy.com.domeafavour.shared.di.component.DaggerNetComponent;
+import melegy.com.domeafavour.shared.di.component.DataStoreComponent;
 import melegy.com.domeafavour.shared.di.component.NetComponent;
 import melegy.com.domeafavour.shared.di.modules.ApiModule;
 import melegy.com.domeafavour.shared.di.modules.AppModule;
+import melegy.com.domeafavour.shared.di.modules.DataStoreModule;
 import melegy.com.domeafavour.shared.di.modules.NetModule;
 
 /**
@@ -22,6 +26,7 @@ public class App extends Application {
     private static App app;
     private NetComponent mNetComponent;
     private ApiComponent mApiComponent;
+    private DataStoreComponent mDataStoreComponent;
 
     @Override
     public void onCreate() {
@@ -29,6 +34,7 @@ public class App extends Application {
         app = this;
         initNetComponent();
         initApiComponent();
+        initDataStoreComponent();
     }
 
     private void initNetComponent() {
@@ -44,6 +50,13 @@ public class App extends Application {
                 .build();
     }
 
+    private void initDataStoreComponent() {
+        mDataStoreComponent = DaggerDataStoreComponent.builder()
+                .appModule(new AppModule(this))
+                .dataStoreModule(new DataStoreModule())
+                .build();
+    }
+
     public static App getApp() {
         return app;
     }
@@ -54,6 +67,10 @@ public class App extends Application {
 
     public NetComponent getNetComponent() {
         return mNetComponent;
+    }
+
+    public DataStoreComponent getDataStoreComponent() {
+        return mDataStoreComponent;
     }
 
 }

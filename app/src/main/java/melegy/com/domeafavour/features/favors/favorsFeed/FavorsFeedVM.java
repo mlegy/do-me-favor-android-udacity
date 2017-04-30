@@ -2,7 +2,7 @@ package melegy.com.domeafavour.features.favors.favorsFeed;
 
 import java.util.List;
 
-import melegy.com.domeafavour.shared.models.resources.Favor;
+import melegy.com.domeafavour.data.models.resources.Favor;
 import rx.Observable;
 
 /**

@@ -1,7 +1,7 @@
 package melegy.com.domeafavour.features.authentication.register;
 
 
-import melegy.com.domeafavour.shared.models.resources.User;
+import melegy.com.domeafavour.data.models.resources.User;
 import rx.Observable;
 
 /**

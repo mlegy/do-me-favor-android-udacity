@@ -4,8 +4,8 @@ import javax.inject.Inject;
 
 import melegy.com.domeafavour.App;
 import melegy.com.domeafavour.shared.NetworkApi;
-import melegy.com.domeafavour.shared.models.resources.Favor;
-import melegy.com.domeafavour.shared.models.responses.AddFavorResponse;
+import melegy.com.domeafavour.data.models.resources.Favor;
+import melegy.com.domeafavour.data.models.responses.AddFavorResponse;
 import rx.Observable;
 
 /**

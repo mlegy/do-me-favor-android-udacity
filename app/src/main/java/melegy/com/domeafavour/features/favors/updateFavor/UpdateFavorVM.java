@@ -1,6 +1,6 @@
 package melegy.com.domeafavour.features.favors.updateFavor;
 
-import melegy.com.domeafavour.shared.models.resources.Favor;
+import melegy.com.domeafavour.data.models.resources.Favor;
 import rx.Observable;
 
 /**
