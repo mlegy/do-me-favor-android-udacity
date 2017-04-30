@@ -4,10 +4,10 @@ package melegy.com.domeafavour.shared.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import melegy.com.domeafavour.features.authentication.register.RegisterVMImpl;
-import melegy.com.domeafavour.features.favors.addFavor.AddFavorVMImpl;
-import melegy.com.domeafavour.features.favors.favorsFeed.FavorsFeedVMImpl;
-import melegy.com.domeafavour.features.favors.updateFavor.UpdateFavorVMImpl;
+import melegy.com.domeafavour.features.authentication.register.RegisterVM;
+import melegy.com.domeafavour.features.favors.addFavor.AddFavorVM;
+import melegy.com.domeafavour.features.favors.favorsFeed.FavorsFeedVM;
+import melegy.com.domeafavour.features.favors.updateFavor.UpdateFavorVM;
 import melegy.com.domeafavour.shared.di.modules.ApiModule;
 
 /**
@@ -18,11 +18,11 @@ import melegy.com.domeafavour.shared.di.modules.ApiModule;
 @Component(modules =  ApiModule.class)
 public interface ApiComponent {
 
-    void inject(RegisterVMImpl registerVM);
+    void inject(RegisterVM registerVM);
 
-    void inject(AddFavorVMImpl addFavorVM);
+    void inject(AddFavorVM addFavorVM);
 
-    void inject(FavorsFeedVMImpl favorsFeedVM);
+    void inject(FavorsFeedVM favorsFeedVM);
 
-    void inject(UpdateFavorVMImpl updateFavorVM);
+    void inject(UpdateFavorVM updateFavorVM);
 }
