@@ -29,10 +29,7 @@ public class AppRepository implements AppDataStore {
 
     @Override
     public Observable<List<Favor>> getFavors() {
-        if (Utility.isConnectingToInternet())
-            return remoteDataStore.getFavors();
+        if (Utility.isConnectingToInternet()) return remoteDataStore.getFavors();
         else return localDataStore.getFavors();
     }
-
-
 }

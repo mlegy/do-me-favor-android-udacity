@@ -23,7 +23,8 @@ public class DatabaseContract {
 
     public static abstract class Favor implements BaseColumns {
         @NonNull
-        public static final String CONTENT_URI_STRING = BASE_CONTENT_URI + "/" + PATH_FAVOR;
+        public static final String CONTENT_URI_STRING = "content://" + CONTENT_AUTHORITY + "/"
+                + PATH_FAVOR;
         static final Uri CONTENT_URI = Uri.parse(CONTENT_URI_STRING);
 
         static final String CONTENT_USER_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY
