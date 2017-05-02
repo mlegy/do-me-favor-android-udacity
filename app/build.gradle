@@ -67,6 +67,10 @@ dependencies {
     compile "com.pushtorefresh.storio:content-resolver-annotations:1.12.3"
     annotationProcessor "com.pushtorefresh.storio:sqlite-annotations-processor:1.12.3"
     annotationProcessor "com.pushtorefresh.storio:content-resolver-annotations-processor:1.12.3"
+    // Google Location and Activity Recognition
+    compile 'com.google.android.gms:play-services-location:10.2.4'
+    // RxPermissions
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
 }
 
 buildscript {
