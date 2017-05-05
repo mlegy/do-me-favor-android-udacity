@@ -14,6 +14,7 @@
         android:padding="8dp">
 
         <TextView
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
@@ -24,6 +25,7 @@
             tools:text="Bring me some bread" />
 
         <TextView
+            android:id="@+id/text_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="3"
@@ -38,6 +40,7 @@
             android:weightSum="2">
 
             <ImageView
+                android:id="@+id/image_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.20"
@@ -46,6 +49,7 @@
                 tools:src="@drawable/ic_menu_gallery" />
 
             <TextView
+                android:id="@+id/text_author"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.80"
@@ -55,7 +59,7 @@
                 tools:text="Ahmad" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/text_distance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

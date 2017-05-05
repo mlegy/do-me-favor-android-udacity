@@ -71,6 +71,9 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:10.2.4'
     // RxPermissions
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+    // Butterknife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
 
 buildscript {

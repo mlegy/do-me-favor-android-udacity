@@ -28,33 +28,33 @@ public abstract class Favor {
     @SerializedName("id")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
-    abstract String id();
+    public abstract String id();
 
     @SerializedName("title")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_TITLE)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_TITLE)
-    abstract String title();
+    public abstract String title();
 
     @SerializedName("description")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_DESCRIPTION)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_DESCRIPTION)
-    abstract String description();
+    public abstract String description();
 
     @SerializedName("owner")
     @Nullable
-    abstract User owner();
+    public abstract User owner();
 
     @SerializedName("benefactor")
     @Nullable
-    abstract User benefactor();
+    public abstract User benefactor();
 
-    @SerializedName("location")
+    @SerializedName("distance")
     @Nullable
-    abstract Location location();
+    public abstract Float distance();
 
     @SerializedName("is_done")
     @Nullable
-    abstract Boolean done();
+    public abstract Boolean done();
 
     public static TypeAdapter<Favor> typeAdapter(Gson gson) {
         return new AutoValue_Favor.GsonTypeAdapter(gson);
