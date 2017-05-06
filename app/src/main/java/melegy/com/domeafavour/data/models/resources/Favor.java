@@ -25,7 +25,7 @@ import melegy.com.domeafavour.data.local.DatabaseContract;
 @StorIOContentResolverType(uri = DatabaseContract.Favor.CONTENT_URI_STRING)
 public abstract class Favor {
 
-    @SerializedName("id")
+    @SerializedName("_id")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
     public abstract String id();
@@ -49,8 +49,9 @@ public abstract class Favor {
     public abstract User benefactor();
 
     @SerializedName("distance")
-    @Nullable
-    public abstract Float distance();
+    @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_DISTANCE)
+    @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_DISTANCE)
+    public abstract float distance();
 
     @SerializedName("is_done")
     @Nullable
@@ -62,7 +63,7 @@ public abstract class Favor {
 
     @StorIOSQLiteCreator
     @StorIOContentResolverCreator
-    static Favor create(String id, String title, String description) {
-        return new AutoValue_Favor(id, title, description, null, null, null, null);
+    static Favor create(String id, String title, String description, float distance) {
+        return new AutoValue_Favor(id, title, description, null, null, distance, null);
     }
 }

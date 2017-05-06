@@ -30,8 +30,8 @@ public class AppRemoteDataStore implements AppDataStore {
     }
 
     @Override
-    public Observable<List<Favor>> getFavors() {
-        return favorsFeedApiService.getNearbyFavor(31.205208, 31.624564)
+    public Observable<List<Favor>> getFavors(double x, double y) {
+        return favorsFeedApiService.getNearbyFavor(x, y)
                 .doOnNext(favors -> localDataStore.saveFavorsToDatabase(favors));
     }
 }

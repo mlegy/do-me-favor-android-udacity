@@ -1,3 +1,4 @@
+
 package melegy.com.domeafavour.data.local;
 
 import android.content.Context;
@@ -35,13 +36,12 @@ public class AppLocalDataStore implements AppDataStore {
                         .putResolver(new FavorStorIOContentResolverPutResolver())
                         .getResolver(new FavorStorIOContentResolverGetResolver())
                         .deleteResolver(new FavorStorIOContentResolverDeleteResolver())
-                        .build()
-                ).build();
+                        .build())
+                .build();
     }
 
-
     @Override
-    public Observable<List<Favor>> getFavors() {
+    public Observable<List<Favor>> getFavors(double x, double y) {
         return mStorIOContentResolver.get()
                 .listOfObjects(Favor.class)
                 .withQuery(Query.builder().uri(DatabaseContract.Favor.CONTENT_URI).build())
@@ -50,7 +50,7 @@ public class AppLocalDataStore implements AppDataStore {
     }
 
     public void saveFavorsToDatabase(List<Favor> favors) {
-        mStorIOContentResolver.put().objects(favors).prepare().executeAsBlocking();
+        mStorIOContentResolver.put().objects(favors).prepare().asRxObservable().subscribe();
     }
 
 }

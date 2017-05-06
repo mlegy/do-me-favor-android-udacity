@@ -28,6 +28,8 @@ public class Provider extends ContentProvider {
         final String authority = DatabaseContract.CONTENT_AUTHORITY;
 
         matcher.addURI(authority, DatabaseContract.PATH_FAVOR + "/#", POST_ITEM);
+        matcher.addURI(authority, DatabaseContract.PATH_FAVOR, POST_DIR);
+
 
         return matcher;
     }

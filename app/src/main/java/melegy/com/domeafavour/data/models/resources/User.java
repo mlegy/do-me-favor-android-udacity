@@ -22,8 +22,11 @@ public abstract class User {
     @SerializedName("email")
     public abstract String email();
 
-    @SerializedName("current_location")
-    public abstract Location currentLocation();
+    @SerializedName("avatar")
+    public abstract String avatar();
+
+    // @SerializedName("current_location")
+    // public abstract Location currentLocation();
 
     public static TypeAdapter<User> typeAdapter(Gson gson) {
         return new AutoValue_User.GsonTypeAdapter(gson);

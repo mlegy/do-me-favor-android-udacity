@@ -37,12 +37,15 @@ public class DatabaseContract {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_DISTANCE = "distance";
 
         static String getPostCreateQuery() {
             return "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_ID + " TEXT NOT NULL PRIMARY KEY, " +
                     COLUMN_TITLE + " TEXT NOT NULL, " +
-                    COLUMN_DESCRIPTION + " TEXT NOT NULL" + ");";
+                    COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                    COLUMN_DISTANCE + " TEXT NOT NULL" +
+                    ");";
         }
 
         static String getUserDeleteQuery() {

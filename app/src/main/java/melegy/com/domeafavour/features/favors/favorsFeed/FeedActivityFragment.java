@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import melegy.com.domeafavour.App;
 import melegy.com.domeafavour.R;
+import melegy.com.domeafavour.data.models.resources.Favor;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,14 +36,20 @@ import melegy.com.domeafavour.R;
 public class FeedActivityFragment extends Fragment implements
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
+    @BindView(R.id.recycler_favors)
+    RecyclerView recyclerFavors;
+
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
+
+    @Inject
+    FavorsFeedVM favorsFeedVM;
 
     public FeedActivityFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        App.getApp().getVMComponent().inject(this);
         initGoogleApiClient();
         super.onCreate(savedInstanceState);
     }
@@ -41,7 +57,9 @@ public class FeedActivityFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @SuppressLint("MissingPermission")
@@ -52,14 +70,27 @@ public class FeedActivityFragment extends Fragment implements
                 .request(Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe(granted -> {
                     if (granted) {
-                        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                                 mGoogleApiClient);
-                        if (mLastLocation != null) {
-                            Log.i("Latitude", String.valueOf(mLastLocation.getLatitude()));
-                            Log.i("Longitude", String.valueOf(mLastLocation.getLongitude()));
-                        }
+                        if (lastLocation != null)
+                            getFavors(lastLocation);
                     }
                 });
+    }
+
+    private void getFavors(Location location) {
+        favorsFeedVM.getNearbyFavors(location.getLongitude(),
+                location.getLatitude())
+                .subscribe(this::populateFavors);
+    }
+
+    private void populateFavors(List<Favor> favors) {
+        FavorsAdapter mAdapter = new FavorsAdapter(favors);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+                this.getActivity());
+        recyclerFavors.setLayoutManager(mLayoutManager);
+        recyclerFavors.setItemAnimator(new DefaultItemAnimator());
+        recyclerFavors.setAdapter(mAdapter);
     }
 
     @Override

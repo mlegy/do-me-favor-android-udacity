@@ -1,12 +1,14 @@
 
 package melegy.com.domeafavour.features.favors.favorsFeed;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ import melegy.com.domeafavour.data.models.resources.Favor;
  * Created by ahmad on 5/5/17.
  */
 
-public class favorsAdapter extends RecyclerView.Adapter<favorsAdapter.ViewHolder> {
+public class FavorsAdapter extends RecyclerView.Adapter<FavorsAdapter.ViewHolder> {
 
     private List<Favor> favors;
 
@@ -38,7 +40,7 @@ public class favorsAdapter extends RecyclerView.Adapter<favorsAdapter.ViewHolder
         TextView mTextViewDistance;
 
         @BindView(R.id.image_author)
-        ImageView mImageViewAuthor;
+        SimpleDraweeView mImageViewAuthor;
 
         ViewHolder(View view) {
             super(view);
@@ -46,7 +48,7 @@ public class favorsAdapter extends RecyclerView.Adapter<favorsAdapter.ViewHolder
         }
     }
 
-    public favorsAdapter(List<Favor> favors) {
+    FavorsAdapter(List<Favor> favors) {
         this.favors = favors;
     }
 
@@ -61,8 +63,22 @@ public class favorsAdapter extends RecyclerView.Adapter<favorsAdapter.ViewHolder
         Favor favor = favors.get(position);
         holder.mTextViewTitle.setText(favor.title());
         holder.mTextViewDescription.setText(favor.description());
-        holder.mTextViewAuthor.setText(favor.owner().firstName());
-        holder.mTextViewDistance.setText(favor.distance().toString());
+        if (favor.owner() != null) {
+            holder.mTextViewAuthor.setText(favor.owner().firstName());
+            holder.mImageViewAuthor.setImageURI(Uri.parse(favor.owner().avatar()));
+        }
+        holder.mTextViewDistance.setText(formatDistance(favor.distance(), holder));
+    }
+
+    private String formatDistance(float distance, ViewHolder holder) {
+        if (distance <= 10)
+            return holder.mTextViewDistance.getContext().getString(R.string.just_her);
+        else if (distance < 1000)
+            return holder.mTextViewDistance.getContext().getString(R.string.meters_away,
+                    Math.round(distance));
+        else
+            return holder.mTextViewDistance.getContext().getString(R.string.km_away,
+                    Math.round(Math.round(distance / 1000)));
     }
 
     @Override

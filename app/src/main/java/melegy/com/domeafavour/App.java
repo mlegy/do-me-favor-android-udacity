@@ -7,16 +7,22 @@ package melegy.com.domeafavour;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.stetho.Stetho;
+
 import melegy.com.domeafavour.shared.di.component.ApiComponent;
 import melegy.com.domeafavour.shared.di.component.DaggerApiComponent;
 import melegy.com.domeafavour.shared.di.component.DaggerDataStoreComponent;
 import melegy.com.domeafavour.shared.di.component.DaggerNetComponent;
+import melegy.com.domeafavour.shared.di.component.DaggerVMComponent;
 import melegy.com.domeafavour.shared.di.component.DataStoreComponent;
 import melegy.com.domeafavour.shared.di.component.NetComponent;
+import melegy.com.domeafavour.shared.di.component.VMComponent;
 import melegy.com.domeafavour.shared.di.modules.ApiModule;
 import melegy.com.domeafavour.shared.di.modules.AppModule;
 import melegy.com.domeafavour.shared.di.modules.DataStoreModule;
 import melegy.com.domeafavour.shared.di.modules.NetModule;
+import melegy.com.domeafavour.shared.di.modules.VMModule;
 
 /**
  * Created by ahmad on 2/26/17.
@@ -27,14 +33,19 @@ public class App extends Application {
     private NetComponent mNetComponent;
     private ApiComponent mApiComponent;
     private DataStoreComponent mDataStoreComponent;
+    private VMComponent mVMComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        if(BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this);
+        Fresco.initialize(this);
         app = this;
         initNetComponent();
         initApiComponent();
         initDataStoreComponent();
+        initVMComponent();
     }
 
     private void initNetComponent() {
@@ -57,6 +68,11 @@ public class App extends Application {
                 .build();
     }
 
+    private void initVMComponent() {
+        mVMComponent = DaggerVMComponent.builder()
+                .vMModule(new VMModule())
+                .build();
+    }
     public static App getApp() {
         return app;
     }
@@ -71,6 +87,10 @@ public class App extends Application {
 
     public DataStoreComponent getDataStoreComponent() {
         return mDataStoreComponent;
+    }
+
+    public VMComponent getVMComponent() {
+        return mVMComponent;
     }
 
 }
