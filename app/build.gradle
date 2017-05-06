@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
@@ -78,6 +79,7 @@ dependencies {
     compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
     // Fresco
     compile 'com.facebook.fresco:fresco:1.3.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 buildscript {

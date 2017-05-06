@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import melegy.com.domeafavour.features.favors.addFavor.AddFavorVM;
 import melegy.com.domeafavour.features.favors.favorsFeed.FavorsFeedVM;
 
 /**
@@ -17,6 +18,12 @@ public class VMModule {
     @Singleton
     FavorsFeedVM provideFavorsFeedVM(){
         return new FavorsFeedVM();
+    }
+
+    @Provides
+    @Singleton
+    AddFavorVM provideAddFavorVM(){
+        return new AddFavorVM();
     }
 
 }
