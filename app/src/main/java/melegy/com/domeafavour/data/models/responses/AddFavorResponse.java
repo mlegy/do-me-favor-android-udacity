@@ -8,7 +8,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import melegy.com.domeafavour.data.models.resources.Error;
-import melegy.com.domeafavour.data.models.resources.Favor;
 
 /**
  * Created by ahmad on 4/17/17.
@@ -18,12 +17,12 @@ import melegy.com.domeafavour.data.models.resources.Favor;
 public abstract class AddFavorResponse {
 
     @Nullable
-    @SerializedName("favor")
-    abstract Favor favor();
+    @SerializedName("success")
+    public abstract String success();
 
     @Nullable
     @SerializedName("error")
-    abstract Error error();
+    public abstract Error error();
 
     public static TypeAdapter<AddFavorResponse> typeAdapter(Gson gson) {
         return new AutoValue_AddFavorResponse.GsonTypeAdapter(gson);

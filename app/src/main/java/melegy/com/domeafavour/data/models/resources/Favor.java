@@ -25,36 +25,37 @@ import melegy.com.domeafavour.data.local.DatabaseContract;
 @StorIOContentResolverType(uri = DatabaseContract.Favor.CONTENT_URI_STRING)
 public abstract class Favor {
 
-    @SerializedName("id")
+    @SerializedName("_id")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_ID, key = true)
-    abstract String id();
+    public abstract String id();
 
     @SerializedName("title")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_TITLE)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_TITLE)
-    abstract String title();
+    public abstract String title();
 
     @SerializedName("description")
     @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_DESCRIPTION)
     @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_DESCRIPTION)
-    abstract String description();
+    public abstract String description();
 
     @SerializedName("owner")
     @Nullable
-    abstract User owner();
+    public abstract User owner();
 
     @SerializedName("benefactor")
     @Nullable
-    abstract User benefactor();
+    public abstract User benefactor();
 
-    @SerializedName("location")
-    @Nullable
-    abstract Location location();
+    @SerializedName("distance")
+    @StorIOSQLiteColumn(name = DatabaseContract.Favor.COLUMN_DISTANCE)
+    @StorIOContentResolverColumn(name = DatabaseContract.Favor.COLUMN_DISTANCE)
+    public abstract float distance();
 
     @SerializedName("is_done")
     @Nullable
-    abstract Boolean done();
+    public abstract Boolean done();
 
     public static TypeAdapter<Favor> typeAdapter(Gson gson) {
         return new AutoValue_Favor.GsonTypeAdapter(gson);
@@ -62,7 +63,7 @@ public abstract class Favor {
 
     @StorIOSQLiteCreator
     @StorIOContentResolverCreator
-    static Favor create(String id, String title, String description) {
-        return new AutoValue_Favor(id, title, description, null, null, null, null);
+    static Favor create(String id, String title, String description, float distance) {
+        return new AutoValue_Favor(id, title, description, null, null, distance, null);
     }
 }

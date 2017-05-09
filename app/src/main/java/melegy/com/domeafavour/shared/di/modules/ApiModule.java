@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import melegy.com.domeafavour.data.AppRepository;
 import melegy.com.domeafavour.features.authentication.register.RegisterApiService;
 import melegy.com.domeafavour.features.favors.addFavor.AddFavorApiService;
 import melegy.com.domeafavour.features.favors.favorsFeed.FavorsFeedApiService;
@@ -38,5 +39,11 @@ public class ApiModule {
     @Singleton
     UpdateFavorApiService provideUpdateFavorApiService(){
         return new UpdateFavorApiService();
+    }
+
+    @Provides
+    @Singleton
+    AppRepository provideAppRepository(){
+        return new AppRepository();
     }
 }

@@ -11,5 +11,5 @@ import rx.Observable;
 
 public interface AppDataStore {
 
-    Observable<List<Favor>> getFavors();
+    Observable<List<Favor>> getFavors(double x, double y);
 }

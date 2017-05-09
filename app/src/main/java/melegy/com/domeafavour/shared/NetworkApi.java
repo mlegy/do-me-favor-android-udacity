@@ -3,6 +3,7 @@ package melegy.com.domeafavour.shared;
 
 import java.util.List;
 
+import melegy.com.domeafavour.data.models.requests.AddFavorRequest;
 import melegy.com.domeafavour.data.models.resources.Favor;
 import melegy.com.domeafavour.data.models.resources.User;
 import melegy.com.domeafavour.data.models.responses.AddFavorResponse;
@@ -30,7 +31,7 @@ public interface NetworkApi {
     Observable<User> updateUser(@Path("id") String userID);
 
     @POST("/favors")
-    Observable<AddFavorResponse> addFavor(@Body Favor favor);
+    Observable<AddFavorResponse> addFavor(@Body AddFavorRequest favor);
 
     @PATCH("/favors/{id}/benefactor")
     Observable<Favor> addBenefactorToFavor(@Path("id") String userId);

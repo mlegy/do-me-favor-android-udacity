@@ -25,7 +25,7 @@ public class DatabaseContract {
         @NonNull
         public static final String CONTENT_URI_STRING = "content://" + CONTENT_AUTHORITY + "/"
                 + PATH_FAVOR;
-        static final Uri CONTENT_URI = Uri.parse(CONTENT_URI_STRING);
+        public static final Uri CONTENT_URI = Uri.parse(CONTENT_URI_STRING);
 
         static final String CONTENT_USER_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY
                 + "/" + PATH_FAVOR;
@@ -37,12 +37,16 @@ public class DatabaseContract {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_DISTANCE = "distance";
 
         static String getPostCreateQuery() {
             return "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_ID + " TEXT NOT NULL PRIMARY KEY, " +
+                    _ID + " integer primary key autoincrement," +
+                    COLUMN_ID + " TEXT NOT NULL, " +
                     COLUMN_TITLE + " TEXT NOT NULL, " +
-                    COLUMN_DESCRIPTION + " TEXT NOT NULL" + ");";
+                    COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                    COLUMN_DISTANCE + " TEXT NOT NULL" +
+                    ");";
         }
 
         static String getUserDeleteQuery() {

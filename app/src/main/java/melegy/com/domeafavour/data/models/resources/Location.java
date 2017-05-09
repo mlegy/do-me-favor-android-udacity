@@ -6,8 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by ahmad on 4/3/17.
  */
@@ -15,15 +13,17 @@ import java.util.List;
 @AutoValue
 public abstract class Location {
 
-    @SerializedName("coordinates")
-    abstract List<Long> coordinates();
+    @SerializedName("long")
+    abstract double x();
+
+    @SerializedName("lat")
+    abstract double y();
 
     public static TypeAdapter<Location> typeAdapter(Gson gson) {
         return new AutoValue_Location.GsonTypeAdapter(gson);
     }
 
-    public static Location create(List<Long> coordinates) {
-        return new AutoValue_Location(coordinates);
+    public static Location create(double x, double y){
+        return new AutoValue_Location(x, y);
     }
-
 }
