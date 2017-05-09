@@ -1,32 +1,26 @@
 
 package melegy.com.domeafavour.features.favors.favorsFeed;
 
-import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import melegy.com.domeafavour.R;
-import melegy.com.domeafavour.data.models.resources.Favor;
 
 /**
- * Created by ahmad on 5/5/17.
+ * Created by ahmad on 5/8/17.
  */
+public class FavorsAdapter extends CursorAdapter {
 
-public class FavorsAdapter extends RecyclerView.Adapter<FavorsAdapter.ViewHolder> {
-
-    private List<Favor> favors;
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
+    static class ViewHolder {
         @BindView(R.id.text_title)
         TextView mTextViewTitle;
 
@@ -43,31 +37,38 @@ public class FavorsAdapter extends RecyclerView.Adapter<FavorsAdapter.ViewHolder
         SimpleDraweeView mImageViewAuthor;
 
         ViewHolder(View view) {
-            super(view);
             ButterKnife.bind(this, view);
         }
     }
 
-    FavorsAdapter(List<Favor> favors) {
-        this.favors = favors;
+    FavorsAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.favors_feed_item, parent, false));
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(R.layout.favors_feed_item, parent, false);
+
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setTag(viewHolder);
+
+        return view;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Favor favor = favors.get(position);
-        holder.mTextViewTitle.setText(favor.title());
-        holder.mTextViewDescription.setText(favor.description());
-        if (favor.owner() != null) {
-            holder.mTextViewAuthor.setText(favor.owner().firstName());
-            holder.mImageViewAuthor.setImageURI(Uri.parse(favor.owner().avatar()));
-        }
-        holder.mTextViewDistance.setText(formatDistance(favor.distance(), holder));
+    public void bindView(View view, Context context, Cursor cursor) {
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
+
+        String title = cursor.getString(FeedActivityFragment.COL_FAVOR_TITLE);
+        viewHolder.mTextViewTitle.setText(title);
+
+        String desc = cursor.getString(FeedActivityFragment.COL_FAVOR_DESC);
+        viewHolder.mTextViewDescription.setText(desc);
+
+        Float dist = cursor.getFloat(FeedActivityFragment.COL_FAVOR_DISTANCE);
+        viewHolder.mTextViewDistance.setText(formatDistance(dist, viewHolder));
+
     }
 
     private String formatDistance(float distance, ViewHolder holder) {
@@ -81,8 +82,4 @@ public class FavorsAdapter extends RecyclerView.Adapter<FavorsAdapter.ViewHolder
                     Math.round(Math.round(distance / 1000)));
     }
 
-    @Override
-    public int getItemCount() {
-        return favors.size();
-    }
 }
