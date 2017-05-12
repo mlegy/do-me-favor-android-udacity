@@ -1,11 +1,13 @@
 package com.domefavor.android.features.authentication.register;
 
 
+import com.domefavor.android.App;
+import com.domefavor.android.data.models.requests.SignUpRequest;
+import com.domefavor.android.data.models.resources.User;
+import com.domefavor.android.shared.NetworkApi;
+
 import javax.inject.Inject;
 
-import com.domefavor.android.App;
-import com.domefavor.android.shared.NetworkApi;
-import com.domefavor.android.data.models.resources.User;
 import rx.Observable;
 
 /**
@@ -21,7 +23,7 @@ public class RegisterApiService {
         App.getApp().getNetComponent().inject(this);
     }
 
-    Observable<User> register(User user){
+    Observable<User> register(SignUpRequest user){
         return networkApi.addUser(user);
     }
 }

@@ -9,7 +9,7 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
-        android:name="com.domefavor.android.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,30 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.domefavor.android.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
-            android:name="com.domefavor.android.data.local.Provider"
+            android:name=".data.local.Provider"
             android:authorities="com.domefavor.android"
             android:exported="false"
             android:syncable="true" />
 
         <activity
-            android:name="com.domefavor.android.features.favors.favorsFeed.FeedActivity"
+            android:name=".features.favors.favorsFeed.FeedActivity"
             android:label="@string/title_activity_feed"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".features.favors.addFavor.AddFavor"
+            android:label="@string/title_activity_add_favor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".features.authentication.register.SignInActivity"
+            android:theme="@style/FullScreen"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.domefavor.android.features.favors.addFavor.AddFavor"
-            android:label="@string/title_activity_add_favor"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

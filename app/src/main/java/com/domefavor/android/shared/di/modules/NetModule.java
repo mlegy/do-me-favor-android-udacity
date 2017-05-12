@@ -1,10 +1,9 @@
 
 package com.domefavor.android.shared.di.modules;
 
-import android.app.Application;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
+import com.domefavor.android.BuildConfig;
+import com.domefavor.android.data.models.AutoValueGsonFactory;
+import com.domefavor.android.shared.NetworkApi;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,9 +12,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import com.domefavor.android.BuildConfig;
-import com.domefavor.android.data.models.AutoValueGsonFactory;
-import com.domefavor.android.shared.NetworkApi;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -31,12 +27,6 @@ import static retrofit2.Retrofit.Builder;
 
 @Module
 public class NetModule {
-
-    @Provides
-    @Singleton
-    SharedPreferences providesSharedPreferences(Application application) {
-        return PreferenceManager.getDefaultSharedPreferences(application);
-    }
 
     @Provides
     @Singleton

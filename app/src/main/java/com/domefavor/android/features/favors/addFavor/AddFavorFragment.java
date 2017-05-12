@@ -4,9 +4,11 @@ package com.domefavor.android.features.favors.addFavor;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.domefavor.android.App;
+import com.domefavor.android.R;
+import com.domefavor.android.features.favors.favorsFeed.FeedActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -35,9 +40,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.domefavor.android.App;
-import com.domefavor.android.R;
-import com.domefavor.android.features.favors.favorsFeed.FeedActivity;
 
 public class AddFavorFragment extends Fragment implements
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
@@ -90,10 +92,17 @@ public class AddFavorFragment extends Fragment implements
                             String title = editTextTitle.getText().toString();
                             String description = editTextDescription.getText().toString();
 
-                            // making async task, just to meet udacity requirements.
-                            new SendPostRequest(getActivity()).execute(title, description,
-                                    "590cf6e0f8970d00119c2c5b", lastLocation.getLongitude() + "",
-                                    lastLocation.getLongitude() + "");
+                            SharedPreferences prefs = PreferenceManager
+                                    .getDefaultSharedPreferences(getContext());
+                            String user_id = prefs.getString("user_id", null);
+
+                            if (user_id != null) {
+                                // making async task, just to meet udacity requirements.
+                                new SendPostRequest(getActivity()).execute(title, description,
+                                        user_id,
+                                        lastLocation.getLongitude() + "",
+                                        lastLocation.getLongitude() + "");
+                            }
                         }
                     } else
                         showMessage(view, R.string.no_permission_error_message);
@@ -151,7 +160,7 @@ public class AddFavorFragment extends Fragment implements
         protected Integer doInBackground(String... params) {
             try {
                 URL url = new URL(
-                        "http://192.168.78.9:3000/favors?access_token=xE33zWa5TKCRNbGb6X8bvrv9erB5xh95k3a9fcAP");
+                        "https://apricot-cobbler-23847.herokuapp.com/favors?access_token=xE33zWa5TKCRNbGb6X8bvrv9erB5xh95k3a9fcAP");
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("title", params[0]);

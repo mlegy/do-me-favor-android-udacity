@@ -1,11 +1,13 @@
 package com.domefavor.android.shared.di.modules;
 
+import com.domefavor.android.features.authentication.register.RegisterVM;
+import com.domefavor.android.features.favors.addFavor.AddFavorVM;
+import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import com.domefavor.android.features.favors.addFavor.AddFavorVM;
-import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
 
 /**
  * Created by ahmad on 4/17/17.
@@ -24,6 +26,12 @@ public class VMModule {
     @Singleton
     AddFavorVM provideAddFavorVM(){
         return new AddFavorVM();
+    }
+
+    @Provides
+    @Singleton
+    RegisterVM provideRegisterVM(){
+        return new RegisterVM();
     }
 
 }

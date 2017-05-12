@@ -1,14 +1,19 @@
 package com.domefavor.android.shared.di.modules;
 
-import javax.inject.Singleton;
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
-import dagger.Module;
-import dagger.Provides;
 import com.domefavor.android.data.AppRepository;
 import com.domefavor.android.features.authentication.register.RegisterApiService;
 import com.domefavor.android.features.favors.addFavor.AddFavorApiService;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedApiService;
 import com.domefavor.android.features.favors.updateFavor.UpdateFavorApiService;
+
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by ahmad on 4/17/17.
@@ -16,6 +21,12 @@ import com.domefavor.android.features.favors.updateFavor.UpdateFavorApiService;
 
 @Module
 public class ApiModule {
+
+    @Provides
+    @Singleton
+    SharedPreferences providesSharedPreferences(Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
+    }
 
     @Provides
     @Singleton

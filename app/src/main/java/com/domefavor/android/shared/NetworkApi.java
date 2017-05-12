@@ -1,12 +1,14 @@
 
 package com.domefavor.android.shared;
 
-import java.util.List;
-
 import com.domefavor.android.data.models.requests.AddFavorRequest;
+import com.domefavor.android.data.models.requests.SignUpRequest;
 import com.domefavor.android.data.models.resources.Favor;
 import com.domefavor.android.data.models.resources.User;
 import com.domefavor.android.data.models.responses.AddFavorResponse;
+
+import java.util.List;
+
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
@@ -22,7 +24,7 @@ import rx.Observable;
 public interface NetworkApi {
 
     @POST("/users")
-    Observable<User> addUser(@Body User user);
+    Observable<User> addUser(@Body SignUpRequest user);
 
     @GET("/users/{id}")
     Observable<User> getUserById(@Path("id") String userID);

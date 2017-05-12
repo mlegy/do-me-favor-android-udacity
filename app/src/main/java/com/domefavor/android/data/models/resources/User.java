@@ -13,6 +13,9 @@ import com.google.gson.annotations.SerializedName;
 @AutoValue
 public abstract class User {
 
+    @SerializedName("_id")
+    public abstract String id();
+
     @SerializedName("first_name")
     public abstract String firstName();
 
@@ -24,9 +27,6 @@ public abstract class User {
 
     @SerializedName("avatar")
     public abstract String avatar();
-
-    // @SerializedName("current_location")
-    // public abstract Location currentLocation();
 
     public static TypeAdapter<User> typeAdapter(Gson gson) {
         return new AutoValue_User.GsonTypeAdapter(gson);

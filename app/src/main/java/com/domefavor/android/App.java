@@ -7,9 +7,6 @@ package com.domefavor.android;
 
 import android.app.Application;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.stetho.Stetho;
-
 import com.domefavor.android.shared.di.component.ApiComponent;
 import com.domefavor.android.shared.di.component.DaggerApiComponent;
 import com.domefavor.android.shared.di.component.DaggerDataStoreComponent;
@@ -23,6 +20,8 @@ import com.domefavor.android.shared.di.modules.AppModule;
 import com.domefavor.android.shared.di.modules.DataStoreModule;
 import com.domefavor.android.shared.di.modules.NetModule;
 import com.domefavor.android.shared.di.modules.VMModule;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.stetho.Stetho;
 
 /**
  * Created by ahmad on 2/26/17.
@@ -50,13 +49,13 @@ public class App extends Application {
 
     private void initNetComponent() {
         mNetComponent = DaggerNetComponent.builder()
-                .appModule(new AppModule(this))
                 .netModule(new NetModule())
                 .build();
     }
 
     private void initApiComponent() {
         mApiComponent = DaggerApiComponent.builder()
+                .appModule(new AppModule(this))
                 .apiModule(new ApiModule())
                 .build();
     }

@@ -14,4 +14,5 @@
     <string name="favor_add_success_message">Your favor request has been added successfully</string>
     <string name="no_permission_error_message">We need a permission to access your location!</string>
     <string name="something_wrong_error_message">Oops something went wrong, please try again</string>
+    <string name="title_activity_signin">Signin</string>
 </resources>

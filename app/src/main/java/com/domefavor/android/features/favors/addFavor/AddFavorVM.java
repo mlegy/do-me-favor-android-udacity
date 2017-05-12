@@ -1,13 +1,16 @@
 
 package com.domefavor.android.features.favors.addFavor;
 
+import android.content.SharedPreferences;
 import android.location.Location;
-
-import javax.inject.Inject;
 
 import com.domefavor.android.App;
 import com.domefavor.android.data.models.requests.AddFavorRequest;
 import com.domefavor.android.data.models.responses.AddFavorResponse;
+import com.domefavor.android.features.authentication.register.RegisterVM;
+
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -20,18 +23,27 @@ public class AddFavorVM {
     @Inject
     AddFavorApiService addFavorApiService;
 
+    @Inject
+    SharedPreferences sharedPreferences;
+
     public AddFavorVM() {
         App.getApp().getApiComponent().inject(this);
     }
 
     public Observable<AddFavorResponse> addFavor(String title, String description,
             Location location) {
-        AddFavorRequest addFavorRequest = AddFavorRequest.create(title, description,
-                "590cf6e0f8970d00119c2c5b",
-                com.domefavor.android.data.models.resources.Location
-                        .create(location.getLongitude(), location.getLatitude()));
-        return addFavorApiService.addFavor(addFavorRequest)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+
+        String userId = sharedPreferences.getString(RegisterVM.USER_ID_KEY, null);
+        if (userId != null) {
+            AddFavorRequest addFavorRequest = AddFavorRequest.create(title, description,
+                    userId,
+                    com.domefavor.android.data.models.resources.Location
+                            .create(location.getLongitude(), location.getLatitude()));
+            return addFavorApiService.addFavor(addFavorRequest)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        } else {
+            return null;
+        }
     }
 }
