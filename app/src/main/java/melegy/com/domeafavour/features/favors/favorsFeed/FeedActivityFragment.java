@@ -148,7 +148,6 @@ public class FeedActivityFragment extends Fragment implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        String sortOrder = DatabaseContract.Favor.COLUMN_DISTANCE + " ASC";
         Uri FavorsUri = DatabaseContract.Favor.CONTENT_URI;
 
         return new CursorLoader(getActivity(),
@@ -156,7 +155,7 @@ public class FeedActivityFragment extends Fragment implements
                 FAVORS_COLUMNS,
                 null,
                 null,
-                sortOrder);
+                null);
 
     }
 
