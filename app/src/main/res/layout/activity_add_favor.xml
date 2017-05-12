@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="melegy.com.domeafavour.features.favors.addFavor.AddFavor">
+    tools:context="com.domefavor.android.features.favors.addFavor.AddFavor">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

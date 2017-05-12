@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="melegy.com.domeafavour">
+    package="com.domefavor.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,7 +9,7 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
-        android:name=".App"
+        android:name="com.domefavor.android.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,18 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.domefavor.android.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
-            android:name=".data.local.Provider"
-            android:authorities="melegy.com.domeafavour"
+            android:name="com.domefavor.android.data.local.Provider"
+            android:authorities="com.domefavor.android"
             android:exported="false"
             android:syncable="true" />
 
         <activity
-            android:name=".features.favors.favorsFeed.FeedActivity"
+            android:name="com.domefavor.android.features.favors.favorsFeed.FeedActivity"
             android:label="@string/title_activity_feed"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,9 +38,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".features.favors.addFavor.AddFavor"
+            android:name="com.domefavor.android.features.favors.addFavor.AddFavor"
             android:label="@string/title_activity_add_favor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

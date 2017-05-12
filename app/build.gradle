@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
     defaultConfig {
-        applicationId "melegy.com.domeafavour"
+        applicationId "com.domefavor.android"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -91,3 +91,4 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
+apply plugin: 'com.google.gms.google-services'
