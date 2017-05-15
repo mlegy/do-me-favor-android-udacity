@@ -101,7 +101,7 @@ public class AddFavorFragment extends Fragment implements
                                 new SendPostRequest(getActivity()).execute(title, description,
                                         user_id,
                                         lastLocation.getLongitude() + "",
-                                        lastLocation.getLongitude() + "");
+                                        lastLocation.getLatitude() + "");
                             }
                         }
                     } else

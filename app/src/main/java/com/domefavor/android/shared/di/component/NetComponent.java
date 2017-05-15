@@ -7,7 +7,7 @@ import dagger.Component;
 import com.domefavor.android.features.authentication.register.RegisterApiService;
 import com.domefavor.android.features.favors.addFavor.AddFavorApiService;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedApiService;
-import com.domefavor.android.features.favors.updateFavor.UpdateFavorApiService;
+import com.domefavor.android.features.favors.updateFavor.FavorApiService;
 import com.domefavor.android.shared.di.modules.AppModule;
 import com.domefavor.android.shared.di.modules.NetModule;
 
@@ -27,5 +27,5 @@ public interface NetComponent {
 
     void inject(FavorsFeedApiService favorsFeedApiService);
 
-    void inject(UpdateFavorApiService updateFavorApiService);
+    void inject(FavorApiService favorApiService);
 }

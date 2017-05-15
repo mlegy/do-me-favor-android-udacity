@@ -6,7 +6,7 @@ import android.location.Location;
 
 import com.domefavor.android.App;
 import com.domefavor.android.data.models.requests.AddFavorRequest;
-import com.domefavor.android.data.models.responses.AddFavorResponse;
+import com.domefavor.android.data.models.responses.FavorActionResponse;
 import com.domefavor.android.features.authentication.register.RegisterVM;
 
 import javax.inject.Inject;
@@ -30,8 +30,8 @@ public class AddFavorVM {
         App.getApp().getApiComponent().inject(this);
     }
 
-    public Observable<AddFavorResponse> addFavor(String title, String description,
-            Location location) {
+    public Observable<FavorActionResponse> addFavor(String title, String description,
+                                                    Location location) {
 
         String userId = sharedPreferences.getString(RegisterVM.USER_ID_KEY, null);
         if (userId != null) {

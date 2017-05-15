@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import com.domefavor.android.R;
+import com.domefavor.android.features.favors.updateFavor.FavorDetails;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.domefavor.android.R;
 
 /**
  * Created by ahmad on 5/8/17.
@@ -49,6 +50,9 @@ public class FavorsAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.favors_feed_item, parent, false);
 
+        view.setOnClickListener(v -> FavorDetails.start(context,
+                cursor.getString(FeedActivityFragment.COL_FAVOR_ID),
+                cursor.getFloat(FeedActivityFragment.COL_FAVOR_DISTANCE)));
         ViewHolder viewHolder = new ViewHolder(view);
         view.setTag(viewHolder);
 

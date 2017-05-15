@@ -5,7 +5,7 @@ import com.domefavor.android.data.models.requests.AddFavorRequest;
 import com.domefavor.android.data.models.requests.SignUpRequest;
 import com.domefavor.android.data.models.resources.Favor;
 import com.domefavor.android.data.models.resources.User;
-import com.domefavor.android.data.models.responses.AddFavorResponse;
+import com.domefavor.android.data.models.responses.FavorActionResponse;
 
 import java.util.List;
 
@@ -32,14 +32,17 @@ public interface NetworkApi {
     @PATCH("/users/{id}")
     Observable<User> updateUser(@Path("id") String userID);
 
+    @GET("/favors/{id}")
+    Observable<Favor> getFavorById(@Path("id") String favorId);
+
     @POST("/favors")
-    Observable<AddFavorResponse> addFavor(@Body AddFavorRequest favor);
+    Observable<FavorActionResponse> addFavor(@Body AddFavorRequest favor);
 
     @PATCH("/favors/{id}/benefactor")
-    Observable<Favor> addBenefactorToFavor(@Path("id") String userId);
+    Observable<FavorActionResponse> addBenefactorToFavor(@Path("id") String userId);
 
     @PATCH("/favors/{id}/done")
-    Observable<Favor> markFavorAsDone(@Path("id") String favorID);
+    Observable<FavorActionResponse> markFavorAsDone(@Path("id") String favorID);
 
     @GET("/favors")
     Observable<List<Favor>> getNearbyFavors(@Query("long") double x, @Query("lat") double y);

@@ -14,7 +14,7 @@ import com.domefavor.android.data.models.resources.Error;
  */
 
 @AutoValue
-public abstract class AddFavorResponse {
+public abstract class FavorActionResponse {
 
     @Nullable
     @SerializedName("success")
@@ -24,8 +24,8 @@ public abstract class AddFavorResponse {
     @SerializedName("error")
     public abstract Error error();
 
-    public static TypeAdapter<AddFavorResponse> typeAdapter(Gson gson) {
-        return new AutoValue_AddFavorResponse.GsonTypeAdapter(gson);
+    public static TypeAdapter<FavorActionResponse> typeAdapter(Gson gson) {
+        return new AutoValue_FavorActionResponse.GsonTypeAdapter(gson);
     }
 
 }

@@ -1,8 +1,10 @@
+
 package com.domefavor.android.shared.di.modules;
 
 import com.domefavor.android.features.authentication.register.RegisterVM;
 import com.domefavor.android.features.favors.addFavor.AddFavorVM;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
+import com.domefavor.android.features.favors.updateFavor.FavorVM;
 
 import javax.inject.Singleton;
 
@@ -18,20 +20,26 @@ public class VMModule {
 
     @Provides
     @Singleton
-    FavorsFeedVM provideFavorsFeedVM(){
+    FavorsFeedVM provideFavorsFeedVM() {
         return new FavorsFeedVM();
     }
 
     @Provides
     @Singleton
-    AddFavorVM provideAddFavorVM(){
+    AddFavorVM provideAddFavorVM() {
         return new AddFavorVM();
     }
 
     @Provides
     @Singleton
-    RegisterVM provideRegisterVM(){
+    RegisterVM provideRegisterVM() {
         return new RegisterVM();
+    }
+
+    @Provides
+    @Singleton
+    FavorVM provideUpdateFavorVM() {
+        return new FavorVM();
     }
 
 }

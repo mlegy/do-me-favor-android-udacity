@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.domefavor.android.App;
+import com.domefavor.android.R;
+import com.domefavor.android.data.local.DatabaseContract;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -28,9 +31,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.domefavor.android.App;
-import com.domefavor.android.R;
-import com.domefavor.android.data.local.DatabaseContract;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -47,12 +47,14 @@ public class FeedActivityFragment extends Fragment implements
     @Inject
     FavorsFeedVM favorsFeedVM;
 
-    static final int COL_FAVOR_TITLE = 1;
-    static final int COL_FAVOR_DESC = 2;
-    static final int COL_FAVOR_DISTANCE = 3;
+    static final int COL_FAVOR_ID = 1;
+    static final int COL_FAVOR_TITLE = 2;
+    static final int COL_FAVOR_DESC = 3;
+    static final int COL_FAVOR_DISTANCE = 4;
 
     private static final String[] FAVORS_COLUMNS = {
             DatabaseContract.Favor.TABLE_NAME + "." + DatabaseContract.Favor._ID,
+            DatabaseContract.Favor.COLUMN_ID,
             DatabaseContract.Favor.COLUMN_TITLE,
             DatabaseContract.Favor.COLUMN_DESCRIPTION,
             DatabaseContract.Favor.COLUMN_DISTANCE
