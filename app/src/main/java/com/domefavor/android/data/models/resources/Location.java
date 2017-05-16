@@ -1,6 +1,8 @@
 
 package com.domefavor.android.data.models.resources;
 
+import android.util.Log;
+
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -14,16 +16,16 @@ import com.google.gson.annotations.SerializedName;
 public abstract class Location {
 
     @SerializedName("long")
-    abstract double x();
+    public abstract double longitude();
 
     @SerializedName("lat")
-    abstract double y();
+    public abstract double latitude();
 
     public static TypeAdapter<Location> typeAdapter(Gson gson) {
         return new AutoValue_Location.GsonTypeAdapter(gson);
     }
 
-    public static Location create(double x, double y){
-        return new AutoValue_Location(x, y);
+    public static Location create(double longitude, double latitude){
+        return new AutoValue_Location(longitude, latitude);
     }
 }

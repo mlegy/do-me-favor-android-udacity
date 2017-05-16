@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.domefavor.android.App;
+import com.domefavor.android.R;
+import com.domefavor.android.data.local.DatabaseContract;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -28,9 +31,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.domefavor.android.App;
-import com.domefavor.android.R;
-import com.domefavor.android.data.local.DatabaseContract;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -47,17 +47,22 @@ public class FeedActivityFragment extends Fragment implements
     @Inject
     FavorsFeedVM favorsFeedVM;
 
-    static final int COL_FAVOR_TITLE = 1;
-    static final int COL_FAVOR_DESC = 2;
-    static final int COL_FAVOR_DISTANCE = 3;
+    static final int COL_FAVOR_ID = 1;
+    static final int COL_FAVOR_TITLE = 2;
+    static final int COL_FAVOR_DESC = 3;
+    static final int COL_FAVOR_DISTANCE = 4;
 
     private static final String[] FAVORS_COLUMNS = {
             DatabaseContract.Favor.TABLE_NAME + "." + DatabaseContract.Favor._ID,
+            DatabaseContract.Favor.COLUMN_ID,
             DatabaseContract.Favor.COLUMN_TITLE,
             DatabaseContract.Favor.COLUMN_DESCRIPTION,
             DatabaseContract.Favor.COLUMN_DISTANCE
     };
     private FavorsAdapter mAdapter;
+    private Location lastLocation;
+    private int mPosition = ListView.INVALID_POSITION;
+    private static final String SELECTED_KEY = "selected_position";
 
     public FeedActivityFragment() {
     }
@@ -76,11 +81,27 @@ public class FeedActivityFragment extends Fragment implements
         mAdapter = new FavorsAdapter(this.getActivity(), null, 0);
         ButterKnife.bind(this, view);
         listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener((adapterView, view1, position, l) -> {
+            Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+            if (cursor != null) {
+                String favorId = cursor.getString(COL_FAVOR_ID);
+                float distance = cursor.getFloat(COL_FAVOR_DISTANCE);
+                ((Callback) getActivity())
+                        .onItemSelected(favorId, distance);
+            }
+            mPosition = position;
+        });
+        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
+            mPosition = savedInstanceState.getInt(SELECTED_KEY);
+        }
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        if (lastLocation != null)
+            getFavors(lastLocation);
         getLoaderManager().initLoader(0, null, this);
         super.onActivityCreated(savedInstanceState);
     }
@@ -93,10 +114,8 @@ public class FeedActivityFragment extends Fragment implements
                 .request(Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe(granted -> {
                     if (granted) {
-                        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                        lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                                 mGoogleApiClient);
-                        if (lastLocation != null)
-                            getFavors(lastLocation);
                     }
                 });
     }
@@ -104,18 +123,21 @@ public class FeedActivityFragment extends Fragment implements
     private void getFavors(Location location) {
         favorsFeedVM.getNearbyFavors(location.getLongitude(),
                 location.getLatitude())
-                .subscribe(favors -> populateFavors(),
+                .subscribe(favors -> Log.i("Feed", "Favors loaded"),
                         throwable -> Log.i("ERROR", throwable.getLocalizedMessage()));
-    }
-
-    private void populateFavors() {
-        getLoaderManager().restartLoader(0, null, this);
-
     }
 
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mPosition != ListView.INVALID_POSITION) {
+            outState.putInt(SELECTED_KEY, mPosition);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -162,10 +184,22 @@ public class FeedActivityFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.swapCursor(data);
+        if (mPosition != ListView.INVALID_POSITION) {
+            // If we don't need to restart the loader, and there's a desired position to restore
+            // to, do so now.
+            listView.smoothScrollToPosition(mPosition);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+    }
+
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        void onItemSelected(String favorId, float distance);
     }
 }

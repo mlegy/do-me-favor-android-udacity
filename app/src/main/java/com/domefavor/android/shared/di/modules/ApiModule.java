@@ -8,7 +8,7 @@ import com.domefavor.android.data.AppRepository;
 import com.domefavor.android.features.authentication.register.RegisterApiService;
 import com.domefavor.android.features.favors.addFavor.AddFavorApiService;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedApiService;
-import com.domefavor.android.features.favors.updateFavor.UpdateFavorApiService;
+import com.domefavor.android.features.favors.updateFavor.FavorApiService;
 
 import javax.inject.Singleton;
 
@@ -48,8 +48,8 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    UpdateFavorApiService provideUpdateFavorApiService(){
-        return new UpdateFavorApiService();
+    FavorApiService provideUpdateFavorApiService(){
+        return new FavorApiService();
     }
 
     @Provides
