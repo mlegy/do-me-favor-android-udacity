@@ -99,11 +99,9 @@ public class FeedActivityFragment extends Fragment implements
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        if (lastLocation != null)
-            getFavors(lastLocation);
+    public void onResume() {
         getLoaderManager().initLoader(0, null, this);
-        super.onActivityCreated(savedInstanceState);
+        super.onResume();
     }
 
     @SuppressLint("MissingPermission")
@@ -116,6 +114,8 @@ public class FeedActivityFragment extends Fragment implements
                     if (granted) {
                         lastLocation = LocationServices.FusedLocationApi.getLastLocation(
                                 mGoogleApiClient);
+                        if (lastLocation != null)
+                            getFavors(lastLocation);
                     }
                 });
     }
