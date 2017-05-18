@@ -15,9 +15,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.domefavor.android.App;
@@ -50,6 +52,12 @@ public class AddFavorFragment extends Fragment implements
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.card_view)
+    CardView cardView;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -92,6 +100,9 @@ public class AddFavorFragment extends Fragment implements
                             String user_id = prefs.getString("user_id", null);
 
                             if (user_id != null) {
+                                progressBar.setVisibility(View.VISIBLE);
+                                cardView.setVisibility(View.GONE);
+                                fab.setVisibility(View.GONE);
                                 // making async task, just to meet udacity requirements.
                                 new SendPostRequest(getActivity()).execute(title, description,
                                         user_id,
@@ -145,7 +156,7 @@ public class AddFavorFragment extends Fragment implements
         }
     }
 
-    public static class SendPostRequest extends AsyncTask<String, Void, Integer> {
+    public class SendPostRequest extends AsyncTask<String, Void, Integer> {
         Context context;
 
         private SendPostRequest(Context context) {
@@ -196,10 +207,14 @@ public class AddFavorFragment extends Fragment implements
 
         @Override
         protected void onPostExecute(Integer result) {
+            progressBar.setVisibility(View.GONE);
             if (result == 200) {
+                Toast.makeText(context, "Favor added successfully", Toast.LENGTH_SHORT).show();
                 FeedActivity.start(context);
             } else {
                 Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                cardView.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.VISIBLE);
             }
         }
     }
