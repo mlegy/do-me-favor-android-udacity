@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.domefavor.android.App;
 import com.domefavor.android.R;
@@ -36,6 +39,12 @@ public class SignInActivity extends AppCompatActivity
     @Inject
     RegisterVM registerVM;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.image_logo)
+    ImageView logo;
+
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -43,9 +52,8 @@ public class SignInActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         App.getApp().getVMComponent().inject(this);
 
-        if (registerVM.isRegisteredUser()) {
+        if (registerVM.isRegisteredUser())
             FeedActivity.start(this);
-        }
 
         setContentView(R.layout.activity_sign_in);
 
@@ -82,6 +90,9 @@ public class SignInActivity extends AppCompatActivity
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
+            progressBar.setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.GONE);
+            logo.setVisibility(View.GONE);
             GoogleSignInAccount acct = result.getSignInAccount();
             registerVM.register(acct).subscribe(user -> FeedActivity.start(this),
                     throwable -> Log.e("ERROR", throwable.getMessage()));

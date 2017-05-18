@@ -12,8 +12,13 @@
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         android:dividerHeight="15dp"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:visibility="gone" />
 
-    </ListView>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </android.support.design.widget.CoordinatorLayout>
