@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -59,6 +60,12 @@ public class AddFavorFragment extends Fragment implements
     @BindView(R.id.card_view)
     CardView cardView;
 
+    @BindView(R.id.text_input_title)
+    TextInputLayout textInputTitle;
+
+    @BindView(R.id.text_input_description)
+    TextInputLayout textInputDescription;
+
     private GoogleApiClient mGoogleApiClient;
 
     public AddFavorFragment() {
@@ -94,20 +101,32 @@ public class AddFavorFragment extends Fragment implements
                         if (lastLocation != null) {
                             String title = editTextTitle.getText().toString();
                             String description = editTextDescription.getText().toString();
+                            if (title.length() < 5) {
+                                textInputTitle.setErrorEnabled(true);
+                                textInputDescription.setErrorEnabled(false);
+                                textInputTitle.setError("Title must be more than 5 chars");
+                            } else if (description.length() < 10) {
+                                textInputDescription.setErrorEnabled(true);
+                                textInputTitle.setErrorEnabled(false);
+                                textInputDescription
+                                        .setError("Description must be more than 10 chars");
+                            } else {
+                                textInputDescription.setErrorEnabled(false);
+                                textInputTitle.setErrorEnabled(false);
+                                SharedPreferences prefs = PreferenceManager
+                                        .getDefaultSharedPreferences(getContext());
+                                String user_id = prefs.getString("user_id", null);
 
-                            SharedPreferences prefs = PreferenceManager
-                                    .getDefaultSharedPreferences(getContext());
-                            String user_id = prefs.getString("user_id", null);
-
-                            if (user_id != null) {
-                                progressBar.setVisibility(View.VISIBLE);
-                                cardView.setVisibility(View.GONE);
-                                fab.setVisibility(View.GONE);
-                                // making async task, just to meet udacity requirements.
-                                new SendPostRequest(getActivity()).execute(title, description,
-                                        user_id,
-                                        lastLocation.getLongitude() + "",
-                                        lastLocation.getLatitude() + "");
+                                if (user_id != null) {
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    cardView.setVisibility(View.GONE);
+                                    fab.setVisibility(View.GONE);
+                                    // making async task, just to meet udacity requirements.
+                                    new SendPostRequest(getActivity()).execute(title, description,
+                                            user_id,
+                                            lastLocation.getLongitude() + "",
+                                            lastLocation.getLatitude() + "");
+                                }
                             }
                         }
                     } else
