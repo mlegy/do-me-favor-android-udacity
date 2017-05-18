@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.domefavor.android.App;
 import com.domefavor.android.R;
@@ -41,6 +42,9 @@ public class FeedActivityFragment extends Fragment implements
 
     @BindView(R.id.list_view)
     ListView listView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -123,8 +127,13 @@ public class FeedActivityFragment extends Fragment implements
     private void getFavors(Location location) {
         favorsFeedVM.getNearbyFavors(location.getLongitude(),
                 location.getLatitude())
-                .subscribe(favors -> Log.i("Feed", "Favors loaded"),
+                .subscribe(favors -> updateUI(),
                         throwable -> Log.i("ERROR", throwable.getLocalizedMessage()));
+    }
+
+    private void updateUI() {
+        progressBar.setVisibility(View.GONE);
+        listView.setVisibility(View.VISIBLE);
     }
 
     @Override
