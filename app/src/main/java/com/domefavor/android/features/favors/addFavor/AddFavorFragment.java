@@ -36,8 +36,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -52,9 +50,6 @@ public class AddFavorFragment extends Fragment implements
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
-
-    @Inject
-    AddFavorVM addFavorVM;
 
     private GoogleApiClient mGoogleApiClient;
 
