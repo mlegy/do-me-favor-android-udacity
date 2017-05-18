@@ -2,7 +2,6 @@
 package com.domefavor.android.shared.di.component;
 
 import com.domefavor.android.features.authentication.register.RegisterVM;
-import com.domefavor.android.features.favors.addFavor.AddFavorVM;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
 import com.domefavor.android.features.favors.updateFavor.FavorVM;
 import com.domefavor.android.shared.di.modules.ApiModule;
@@ -23,8 +22,6 @@ import dagger.Component;
 public interface ApiComponent {
 
     void inject(RegisterVM registerVM);
-
-    void inject(AddFavorVM addFavorVM);
 
     void inject(FavorsFeedVM favorsFeedVM);
 

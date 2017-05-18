@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 
 import com.domefavor.android.data.AppRepository;
 import com.domefavor.android.features.authentication.register.RegisterApiService;
-import com.domefavor.android.features.favors.addFavor.AddFavorApiService;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedApiService;
 import com.domefavor.android.features.favors.updateFavor.FavorApiService;
 
@@ -32,12 +31,6 @@ public class ApiModule {
     @Singleton
     RegisterApiService provideRegisterApiService(){
         return new RegisterApiService();
-    }
-
-    @Provides
-    @Singleton
-    AddFavorApiService provideAddFavorApiService(){
-        return new AddFavorApiService();
     }
 
     @Provides
