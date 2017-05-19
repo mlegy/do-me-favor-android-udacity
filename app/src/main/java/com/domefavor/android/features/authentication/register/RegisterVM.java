@@ -36,9 +36,12 @@ public class RegisterVM {
 
     public Observable<User> register(GoogleSignInAccount account) {
 
+        String avatar = (account.getPhotoUrl() != null) ? account.getPhotoUrl().toString()
+                : "https://flipagram.com/assets/resources/img/fg-avatar-anonymous-user-retina.png";
+
         SignUpRequest user = SignUpRequest.create(account.getGivenName(), account.getFamilyName(),
                 account.getEmail(),
-                account.getPhotoUrl().toString());
+                avatar);
         return registerApiService.register(user).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).doOnNext(this::handleSuccessLogin);
     }
