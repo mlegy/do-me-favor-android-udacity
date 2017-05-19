@@ -76,6 +76,12 @@ public class FavorDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_favor_details, container, false);
         ButterKnife.bind(this, view);
+
+        boolean isOwner = favorVM.isFavorOwner(this.favorOwner);
+        if (isOwner)
+            fab.setContentDescription(getString(R.string.mark_favor_done_button));
+        else
+            fab.setContentDescription(getString(R.string.do_favor_button));
         return view;
     }
 

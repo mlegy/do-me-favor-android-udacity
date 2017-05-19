@@ -11,4 +11,4 @@
     app:itemIconTint="#333"
     app:itemTextColor="#333"
     app:menu="@menu/navigation_drawer_items"
-    tools:showIn="@layout/campaign_report_activity" />
+    tools:showIn="@layout/activity_feed" />

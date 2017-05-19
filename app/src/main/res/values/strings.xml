@@ -27,4 +27,7 @@
     <string name="drawer_close">close</string>
     <string name="nearby_favors">Nearby Favors</string>
     <string name="settings">Settings</string>
+    <string name="add_new_favor">Add new favor</string>
+    <string name="mark_favor_done_button">Mark favor as done</string>
+    <string name="do_favor_button">Do this favor</string>
 </resources>

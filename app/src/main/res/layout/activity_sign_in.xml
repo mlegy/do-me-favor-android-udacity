@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:contentDescription="@string/common_signin_button_text_long"
             android:layout_centerInParent="true" />
 
         <ImageView
