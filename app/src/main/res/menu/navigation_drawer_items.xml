@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/nav_item_feed"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/nearby_favors"
+            tools:title="Nearby Favors" />
+    </group>
+</menu>

@@ -23,4 +23,8 @@
     <string name="benefactor_success_message">Thank you, you have been added as a benefactor to this favor</string>
     <string name="favor_marked_done">marked as done</string>
     <string name="no_favors_found">no favors found</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="nearby_favors">Nearby Favors</string>
+    <string name="settings">Settings</string>
 </resources>

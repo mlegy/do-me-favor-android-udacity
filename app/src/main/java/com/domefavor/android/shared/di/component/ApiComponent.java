@@ -4,6 +4,7 @@ package com.domefavor.android.shared.di.component;
 import com.domefavor.android.features.authentication.register.RegisterVM;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
 import com.domefavor.android.features.favors.updateFavor.FavorVM;
+import com.domefavor.android.shared.NavigationVM;
 import com.domefavor.android.shared.di.modules.ApiModule;
 import com.domefavor.android.shared.di.modules.AppModule;
 
@@ -26,4 +27,6 @@ public interface ApiComponent {
     void inject(FavorsFeedVM favorsFeedVM);
 
     void inject(FavorVM favorVM);
+
+    void inject(NavigationVM navigationVM);
 }
