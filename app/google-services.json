@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "469727741142",
+    "project_id": "do-me-favor"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469727741142:android:773e8a5c13d87e59",
+        "android_client_info": {
+          "package_name": "com.domefavor.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469727741142-6k6rt6kp77cm7lqdr5ts0uuso1gve8f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.domefavor.android",
+            "certificate_hash": "58b37001c4bd4c138eb9751c42306df7339a1b10"
+          }
+        },
+        {
+          "client_id": "469727741142-4s3oklfe5qtkb54oa2s1r112tj3uhsr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG6yNpBK3g88RVHW0UJcmYc8LlBe0bXX4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

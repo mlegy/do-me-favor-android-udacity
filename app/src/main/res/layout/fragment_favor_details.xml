@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.domefavor.android.features.favors.updateFavor.FavorDetailsFragment"
+    tools:showIn="@layout/activity_favor_details">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/cardview_margin_bottom"
+        android:layout_marginEnd="@dimen/cardview_margin"
+        android:layout_marginStart="@dimen/cardview_margin"
+        android:layout_marginTop="@dimen/cardview_margin"
+        app:cardCornerRadius="@dimen/cardview_elevation"
+        app:cardElevation="@dimen/cardview_radius"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_favor_title"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary"
+                android:fontFamily="sans-serif-condensed"
+                android:padding="@dimen/title_padding"
+                android:textColor="@android:color/white"
+                tools:text="Bring me some bread" />
+
+            <TextView
+                android:id="@+id/text_favor_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/details_padding"
+                tools:text="I am an old man, I need someone to bring me a bag of bread,\nyou can bring it from any baker as you like.\nIt would be perfect if you can get it before 7 pm." />
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="@dimen/title_padding"
+                android:weightSum="2">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/image_author"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_weight="0.10"
+                    android:gravity="center_vertical|start"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp" />
+
+                <TextView
+                    android:id="@+id/text_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.90"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/primary_text"
+                    android:textSize="13sp"
+                    tools:text="Ahmad" />
+
+                <TextView
+                    android:id="@+id/text_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical|end"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/secondary_text_size"
+                    tools:text="400m away" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="false"
+        app:srcCompat="@drawable/ic_action_check" />
+
+
+</android.support.design.widget.CoordinatorLayout>
