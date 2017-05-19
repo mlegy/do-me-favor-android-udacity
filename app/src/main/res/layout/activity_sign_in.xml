@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/sign_in_button"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="@dimen/large_margin"
             android:src="@mipmap/ic_launcher_round"
             android:contentDescription="@string/app_name" />
 
