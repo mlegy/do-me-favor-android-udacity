@@ -72,7 +72,6 @@ public class BaseActivity extends AppCompatActivity {
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_item_feed:
-                                FeedActivity.start(this);
                                 drawerLayout.closeDrawers();
                                 break;
                         }
