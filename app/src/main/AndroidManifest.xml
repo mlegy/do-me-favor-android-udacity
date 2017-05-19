@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name=".data.local.Provider"
             android:authorities="com.domefavor.android"
@@ -60,6 +59,7 @@
             android:name=".features.widget.WidgetRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <activity android:name=".shared.BaseActivity"></activity>
     </application>
 
 </manifest>

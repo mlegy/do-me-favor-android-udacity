@@ -6,6 +6,7 @@ import com.domefavor.android.features.favors.addFavor.AddFavorFragment;
 import com.domefavor.android.features.favors.favorsFeed.FeedActivity;
 import com.domefavor.android.features.favors.favorsFeed.FeedActivityFragment;
 import com.domefavor.android.features.favors.updateFavor.FavorDetailsFragment;
+import com.domefavor.android.shared.BaseActivity;
 import com.domefavor.android.shared.di.modules.VMModule;
 
 import javax.inject.Singleton;
@@ -19,6 +20,8 @@ import dagger.Component;
 @Singleton
 @Component(modules =  VMModule.class)
 public interface VMComponent {
+
+    void inject(BaseActivity baseActivity);
 
     void inject(FeedActivityFragment feedActivityFragment);
 

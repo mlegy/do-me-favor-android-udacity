@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#fcfcfc"
+    app:headerLayout="@layout/nav_header"
+    app:itemIconTint="#333"
+    app:itemTextColor="#333"
+    app:menu="@menu/navigation_drawer_items"
+    tools:showIn="@layout/campaign_report_activity" />

@@ -4,6 +4,7 @@ package com.domefavor.android.shared.di.modules;
 import com.domefavor.android.features.authentication.register.RegisterVM;
 import com.domefavor.android.features.favors.favorsFeed.FavorsFeedVM;
 import com.domefavor.android.features.favors.updateFavor.FavorVM;
+import com.domefavor.android.shared.NavigationVM;
 
 import javax.inject.Singleton;
 
@@ -35,4 +36,9 @@ public class VMModule {
         return new FavorVM();
     }
 
+    @Provides
+    @Singleton
+    NavigationVM provideNavigationVM() {
+        return new NavigationVM();
+    }
 }

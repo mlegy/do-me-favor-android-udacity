@@ -27,6 +27,8 @@ public class RegisterVM {
     SharedPreferences sharedPreferences;
 
     public static final String USER_ID_KEY = "user_id";
+    public static final String USER_NAME_KEY = "user_name";
+    public static final String USER_AVATAR_KEY = "user_avatar";
 
     public RegisterVM() {
         App.getApp().getApiComponent().inject(this);
@@ -44,10 +46,12 @@ public class RegisterVM {
     private void handleSuccessLogin(User user) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(USER_ID_KEY, user.id());
+        editor.putString(USER_NAME_KEY, user.firstName());
+        editor.putString(USER_AVATAR_KEY, user.avatar());
         editor.apply();
     }
 
-    public boolean isRegisteredUser() {
+    boolean isRegisteredUser() {
         return sharedPreferences.getString(USER_ID_KEY, null) != null;
     }
 }
