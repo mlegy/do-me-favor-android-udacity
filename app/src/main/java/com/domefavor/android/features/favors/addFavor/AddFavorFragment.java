@@ -45,6 +45,7 @@ import butterknife.ButterKnife;
 public class AddFavorFragment extends Fragment implements
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
+    public static final String USER_ID = "user_id";
     @BindView(R.id.editText_title)
     TextInputEditText editTextTitle;
 
@@ -104,18 +105,18 @@ public class AddFavorFragment extends Fragment implements
                             if (title.length() < 5) {
                                 textInputTitle.setErrorEnabled(true);
                                 textInputDescription.setErrorEnabled(false);
-                                textInputTitle.setError("Title must be more than 5 chars");
+                                textInputTitle.setError(getString(R.string.title_validation_error));
                             } else if (description.length() < 10) {
                                 textInputDescription.setErrorEnabled(true);
                                 textInputTitle.setErrorEnabled(false);
                                 textInputDescription
-                                        .setError("Description must be more than 10 chars");
+                                        .setError(getString(R.string.description_validation_error));
                             } else {
                                 textInputDescription.setErrorEnabled(false);
                                 textInputTitle.setErrorEnabled(false);
                                 SharedPreferences prefs = PreferenceManager
                                         .getDefaultSharedPreferences(getContext());
-                                String user_id = prefs.getString("user_id", null);
+                                String user_id = prefs.getString(USER_ID, null);
 
                                 if (user_id != null) {
                                     progressBar.setVisibility(View.VISIBLE);
@@ -176,6 +177,17 @@ public class AddFavorFragment extends Fragment implements
     }
 
     public class SendPostRequest extends AsyncTask<String, Void, Integer> {
+        static final String URL = "https://apricot-cobbler-23847.herokuapp.com/favors?access_token=xE33zWa5TKCRNbGb6X8bvrv9erB5xh95k3a9fcAP";
+        static final String TITLE = "title";
+        static final String DESCRIPTION = "description";
+        static final String OWNER = "owner";
+        static final String LONG = "long";
+        static final String LAT = "lat";
+        static final String LOCATION = "location";
+        static final String POST = "POST";
+        static final String CONTENT_TYPE = "Content-Type";
+        static final String CONTENT_TYPE_VALUE = "application/json; charset=UTF-8";
+        static final String UTF_8 = "UTF-8";
         Context context;
 
         private SendPostRequest(Context context) {
@@ -185,31 +197,31 @@ public class AddFavorFragment extends Fragment implements
         protected Integer doInBackground(String... params) {
             try {
                 URL url = new URL(
-                        "https://apricot-cobbler-23847.herokuapp.com/favors?access_token=xE33zWa5TKCRNbGb6X8bvrv9erB5xh95k3a9fcAP");
+                        URL);
 
                 JSONObject postDataParams = new JSONObject();
-                postDataParams.put("title", params[0]);
-                postDataParams.put("description", params[1]);
-                postDataParams.put("owner", params[2]);
+                postDataParams.put(TITLE, params[0]);
+                postDataParams.put(DESCRIPTION, params[1]);
+                postDataParams.put(OWNER, params[2]);
 
                 JSONObject location = new JSONObject();
-                location.put("long", Double.valueOf(params[3]));
-                location.put("lat", Double.valueOf(params[4]));
+                location.put(LONG, Double.valueOf(params[3]));
+                location.put(LAT, Double.valueOf(params[4]));
 
-                postDataParams.put("location", location);
+                postDataParams.put(LOCATION, location);
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setReadTimeout(15000);
                 conn.setConnectTimeout(15000);
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod(POST);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
-                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                conn.setRequestProperty(CONTENT_TYPE, CONTENT_TYPE_VALUE);
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
+                        new OutputStreamWriter(os, UTF_8));
                 writer.write(postDataParams.toString());
 
                 writer.flush();
@@ -228,10 +240,12 @@ public class AddFavorFragment extends Fragment implements
         protected void onPostExecute(Integer result) {
             progressBar.setVisibility(View.GONE);
             if (result == 200) {
-                Toast.makeText(context, "Favor added successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.favor_add_success_message),
+                        Toast.LENGTH_SHORT).show();
                 FeedActivity.start(context);
             } else {
-                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.something_wrong_error_message),
+                        Toast.LENGTH_SHORT).show();
                 cardView.setVisibility(View.VISIBLE);
                 fab.setVisibility(View.VISIBLE);
             }

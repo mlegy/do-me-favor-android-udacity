@@ -14,8 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.TaskStackBuilder;
 import android.widget.RemoteViews;
 
-import com.domefavor.android.MainActivity;
 import com.domefavor.android.R;
+import com.domefavor.android.features.favors.favorsFeed.FeedActivity;
 import com.domefavor.android.features.favors.updateFavor.FavorDetails;
 
 public class FavorAppWidget extends AppWidgetProvider {
@@ -27,7 +27,7 @@ public class FavorAppWidget extends AppWidgetProvider {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.favor_app_widget);
 
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(context, FeedActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             remoteViews.setOnClickPendingIntent(R.id.widget, pendingIntent);
 

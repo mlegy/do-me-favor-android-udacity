@@ -9,24 +9,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.domefavor.android.App;
 import com.domefavor.android.R;
 import com.domefavor.android.data.local.DatabaseContract;
+import com.domefavor.android.data.models.resources.Favor;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.tbruyelle.rxpermissions.RxPermissions;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -45,6 +50,12 @@ public class FeedActivityFragment extends Fragment implements
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+
+    @BindView(R.id.text_no_favors)
+    TextView textNoFavors;
+
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -127,13 +138,18 @@ public class FeedActivityFragment extends Fragment implements
     private void getFavors(Location location) {
         favorsFeedVM.getNearbyFavors(location.getLongitude(),
                 location.getLatitude())
-                .subscribe(favors -> updateUI(),
-                        throwable -> Log.i("ERROR", throwable.getLocalizedMessage()));
+                .subscribe(this::updateUI,
+                        throwable -> Snackbar.make(coordinatorLayout,
+                                R.string.something_wrong_error_message,
+                                Snackbar.LENGTH_SHORT).show());
     }
 
-    private void updateUI() {
+    private void updateUI(List<Favor> favors) {
         progressBar.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
+        if (favors.size() > 0)
+            listView.setVisibility(View.VISIBLE);
+        else
+            textNoFavors.setVisibility(View.VISIBLE);
     }
 
     @Override
