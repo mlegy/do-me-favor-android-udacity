@@ -116,17 +116,17 @@ public class FavorDetailsFragment extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity(),
                 R.style.AppCompatAlertDialogStyle);
-        builder.setTitle("Confirmation");
-        builder.setMessage((isOwner) ? "Are yo sure you want to mark the favor as done?"
-                : "Are yo sure yo want to do this favor?");
+        builder.setTitle(R.string.confirmation);
+        builder.setMessage((isOwner) ? getString(R.string.favor_done_confirmation_messgae)
+                : getString(R.string.favor_benefactor_confirmation_message));
         if (isOwner)
-            builder.setPositiveButton("OK",
+            builder.setPositiveButton(R.string.ok,
                     (dialog, which) -> markFavorAsDone());
         else
-            builder.setPositiveButton("OK",
+            builder.setPositiveButton(R.string.ok,
                     (dialog, which) -> markFavorAsWillDo());
 
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.show();
 
     }
@@ -135,7 +135,7 @@ public class FavorDetailsFragment extends Fragment {
         favorVM.markFavorAsDone(favorId).subscribe(
                 favor -> updateUIAfterFavorDone(),
                 throwable -> Toast
-                        .makeText(this.getActivity(), "Something went wrong", Toast.LENGTH_SHORT)
+                        .makeText(this.getActivity(), R.string.something_wrong_error_message, Toast.LENGTH_SHORT)
                         .show());
 
     }
@@ -144,17 +144,17 @@ public class FavorDetailsFragment extends Fragment {
         favorVM.addBenefactorToFavor().subscribe(
                 favor -> Toast
                         .makeText(this.getActivity(),
-                                "Thank you, you have been added as a benefactor to this favor",
+                                R.string.benefactor_success_message,
                                 Toast.LENGTH_SHORT)
                         .show(),
                 throwable -> Toast
-                        .makeText(this.getActivity(), "Something went wrong", Toast.LENGTH_SHORT)
+                        .makeText(this.getActivity(), R.string.something_wrong_error_message, Toast.LENGTH_SHORT)
                         .show());
 
     }
 
     private void updateUIAfterFavorDone() {
-        Toast.makeText(this.getActivity(), "marked as done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getActivity(), R.string.favor_marked_done, Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
 }
