@@ -7,12 +7,5 @@
             android:icon="@drawable/ic_dashboard"
             android:title="@string/nearby_favors"
             tools:title="Nearby Favors" />
-
-        <item
-            android:id="@+id/nam_item_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/settings"
-            tools:title="Settings" />
-
     </group>
 </menu>

@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -74,9 +73,6 @@ public class BaseActivity extends AppCompatActivity {
                         switch (id) {
                             case R.id.nav_item_feed:
                                 FeedActivity.start(this);
-                                drawerLayout.closeDrawers();
-                                break;
-                            case R.id.nam_item_settings:
                                 drawerLayout.closeDrawers();
                                 break;
                         }
