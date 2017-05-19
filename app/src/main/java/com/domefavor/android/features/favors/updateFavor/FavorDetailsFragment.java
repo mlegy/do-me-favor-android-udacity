@@ -3,10 +3,11 @@ package com.domefavor.android.features.favors.updateFavor;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,8 @@ public class FavorDetailsFragment extends Fragment {
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
 
     private String favorId;
     private float distance;
@@ -84,7 +87,8 @@ public class FavorDetailsFragment extends Fragment {
 
     private void BindVM() {
         favorVM.getFavorById(favorId).subscribe(this::updateUI,
-                throwable -> Log.e("ERROR", throwable.getMessage()));
+                throwable -> Snackbar.make(coordinatorLayout,
+                        R.string.something_wrong_error_message, Snackbar.LENGTH_SHORT).show());
     }
 
     private void updateUI(Favor favor) {
@@ -135,7 +139,8 @@ public class FavorDetailsFragment extends Fragment {
         favorVM.markFavorAsDone(favorId).subscribe(
                 favor -> updateUIAfterFavorDone(),
                 throwable -> Toast
-                        .makeText(this.getActivity(), R.string.something_wrong_error_message, Toast.LENGTH_SHORT)
+                        .makeText(this.getActivity(), R.string.something_wrong_error_message,
+                                Toast.LENGTH_SHORT)
                         .show());
 
     }
@@ -148,7 +153,8 @@ public class FavorDetailsFragment extends Fragment {
                                 Toast.LENGTH_SHORT)
                         .show(),
                 throwable -> Toast
-                        .makeText(this.getActivity(), R.string.something_wrong_error_message, Toast.LENGTH_SHORT)
+                        .makeText(this.getActivity(), R.string.something_wrong_error_message,
+                                Toast.LENGTH_SHORT)
                         .show());
 
     }
